@@ -31,7 +31,7 @@ const Navbar = () => {
 
       <div className="right flex items-center gap-4">
         <div className="icon h-7 w-7 flex items-center justify-center text-base border-1 rounded-full border-slate-500"><i className="ri-search-line"></i></div>
-        <div className="icon h-7 w-7 flex items-center justify-center text-base border-1 rounded-full border-slate-500"><i className="ri-shopping-cart-2-fill"></i></div>
+        <NavLink to={'/cart'} className="icon h-7 w-7 flex items-center justify-center text-base border-1 rounded-full border-slate-500"><i className="ri-shopping-cart-2-fill"></i></NavLink>
       </div>
     </div>
   )

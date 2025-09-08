@@ -1,13 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ShopContext from "../Context/ShopContext";
+import {Star} from 'lucide-react'
 
 const Product = () => {
   const { productId } = useParams();
   const { products, currency, addToCart } = useContext(ShopContext);
   const [productData, setProductData] = useState(false);
   const [image, setImage] = useState("");
-  const [size, setSize] = useState(null)
 
   const fetchProductsData = () => {
     const foundProduct = products.find((item) => item._id == productId);
@@ -17,83 +17,109 @@ const Product = () => {
 
   useEffect(() => {
     fetchProductsData();
-    console.log(productData.sizes);
   }, [productId, products, productData]);
 
   return productData ? (
-    <div className="border-t-2 pt-10 transition-opacity ease-in duration-500 opacity-100">
-      {/* Products Data */}
-      <div className="flex gap-12 flex-col sm:flex-row">
-        {/* product images */}
-        <div className="flex flex-1 flex-col-reverse sm:flex-row gap-3">
-          <div className="flex sm:flex-col overflow-x-auto sm:overflow-y-scroll justify-between sm:justify-normal sm:w-[18.7%] w-full">
-            {productData.image.map((image, index) => (
+    <div className="border-t pt-10">
+      {/* Product Section */}
+      <div className="flex flex-col lg:flex-row gap-12">
+        
+        {/* Images */}
+        <div className="flex-1 flex flex-col lg:flex-row gap-4">
+          {/* Thumbnails */}
+          <div className="flex lg:flex-col gap-2 overflow-x-auto lg:overflow-y-auto w-full lg:w-[20%]">
+            {productData.image.map((img, idx) => (
               <img
-                onClick={() => setImage(image)}
-                src={image}
-                alt=""
-                key={index}
-                className="w-[50%] sm:w-full sm:mb-3 cursor-pointer flex-shrink-0"
+                key={idx}
+                src={img}
+                onClick={() => setImage(img)}
+                className={`cursor-pointer rounded-lg border ${
+                  image === img ? "border-blue-600" : "border-gray-200"
+                } w-24 h-24 object-cover`}
+                alt="thumbnail"
               />
             ))}
           </div>
 
-          <div className="w-full sm:w-[80%]">
-            <img src={image} className="w-full h-auto" alt="" />
+          {/* Main Image */}
+          <div className="flex-1">
+            <img
+              src={image}
+              alt={productData.name}
+              className="rounded-xl shadow-lg w-full max-h-[500px] object-contain bg-gray-50"
+            />
           </div>
         </div>
-        {/* Product info */}
-        <div className="flex-1">
-          <p className="text-2xl mt-3 font-medium">{productData.name}</p>
-          <div className="flex items-center gap-1">
-            {/* <img src={assets.star_icon} alt="" className="w-3 5" />
-            <img src={assets.star_icon} alt="" className="w-3 5" />
-            <img src={assets.star_icon} alt="" className="w-3 5" />
-            <img src={assets.star_icon} alt="" className="w-3 5" />
-            <img src={assets.star_dull_icon} alt="" className="w-3 5" /> */}
-            <p className="pl-2">(122)</p>
-          </div>
-          <div className="mt-5 font-medium text-3xl">{currency}{productData.price}</div>
-          <p className="mt-5 text-gray-600 sm:w-4/5">{productData.description}</p>
-          <div className="flex flex-col gap-4 my-8">
-            <p>Select Size</p>
-            <div className="flex gap-2">
-              {
-                productData.sizes.map((thissize,idx) => (
-                  <button key={idx} onClick={() => setSize(thissize)} className={`p-2 px-4 rounded-sm bg-gray-100 ${thissize == size ? ' border-2 border-orange-600' : ''}`}>{thissize}</button>
-                ))
-              }
-            </div>
+
+        {/* Product Info */}
+        <div className="flex-1 space-y-6">
+          <h1 className="text-3xl font-semibold">{productData.name}</h1>
+
+          {/* Ratings */}
+          <div className="flex items-center gap-1 text-yellow-500">
+            {Array.from({ length: 4 }).map((_, i) => (
+              <Star key={i} className="w-5 h-5 fill-yellow-500" />
+            ))}
+            <Star className="w-5 h-5 text-gray-400" />
+            <p className="ml-2 text-gray-500">(122 Reviews)</p>
           </div>
 
-          {/* Add to cart button */}
-          <button onClick={() => addToCart(productId, size)} className="px-8 py-3 bg-black text-white text-sm active:bg-gray-700 cursor-pointer">ADD TO CART</button>
-          <hr className="mt-8 sm:w-4/5" />
-          <div className="text-sm text-gray-500 flex flex-col gap-1 mt-5">
-            <p>100% Original Product.</p>
-            <p>Cash on Delivery is available in this product.</p>
-            <p>Easy return and exchange policy in this product.</p>
+          {/* Price */}
+          <div className="text-4xl font-bold text-blue-600">
+            {currency}
+            {productData.price}
+          </div>
+
+          {/* Description */}
+          <p className="text-gray-600 leading-relaxed">
+            {productData.description}
+          </p>
+
+          {/* CTA */}
+          <button
+            onClick={() => addToCart(productId)}
+            className="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl shadow-md transition"
+          >
+            Add to Cart
+          </button>
+
+          {/* Extra Info */}
+          <div className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm text-gray-600">
+            <div className="p-3 border rounded-lg">✅ 100% Original Product</div>
+            <div className="p-3 border rounded-lg">💵 Cash on Delivery Available</div>
+            <div className="p-3 border rounded-lg">🔄 Easy Return & Exchange</div>
           </div>
         </div>
       </div>
 
-      {/* Review and Description area */}
-      <div className="mt-20">
-        <div className="flex">
-          <b className="border px-5 py-3 text-sm">Description</b>
-          <p className="border px-5 py-3 text-sm">Reviews (122) </p>
+      {/* Tabs */}
+      <div className="mt-16">
+        <div className="flex border-b">
+          <button className="px-6 py-3 border-b-2 border-blue-600 font-medium">
+            Description
+          </button>
+          <button className="px-6 py-3 text-gray-500 hover:text-blue-600">
+            Reviews (122)
+          </button>
         </div>
 
-        <div className="flex border p-6 flex-col text-sm text-gray-500 gap-4">
-          <p>An e-commerce website is an online platform that facilitates the buying and selling of products or services over the internet. It serves as a virtual marketplace where businesses and individuals can showcase their products, interact with customers, and conduct transactions without the need for a physical presence. E-commerce websites have gained immense popularity due to their convenience, accessibility, and the global reach they offer.</p>
-          <p>E-commerce websites typically display products or services along with detailed descriptions, images, prices, and any available variations (e.g., sizes, colors). Each product usually has its own dedicated page with relevant information.</p>
+        {/* Description Content */}
+        <div className="p-6 text-gray-600 leading-relaxed">
+          <p>
+            An e-commerce website is an online platform that facilitates the
+            buying and selling of products or services over the internet. It
+            serves as a virtual marketplace where businesses and individuals
+            can showcase their products, interact with customers, and conduct
+            transactions without the need for a physical presence.
+          </p>
+          <p className="mt-4">
+            E-commerce websites typically display products or services along
+            with detailed descriptions, images, prices, and any available
+            variations (e.g., sizes, colors). Each product usually has its own
+            dedicated page with relevant information.
+          </p>
         </div>
       </div>
-
-
-      {/* Related Products */}
-      {/* <RelatedProducts category={productData.category} subCategory={productData.subCategory} productId={productId} /> */}
-      
     </div>
   ) : (
     <div className="opacity-0"></div>

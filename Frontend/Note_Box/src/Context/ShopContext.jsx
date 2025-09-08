@@ -10,13 +10,14 @@ export const ShopContextProvider = (props) => {
   const [search, setSearch] = useState("");
   const [cartItems, setCartItems] = useState({});
 
-  const products = [
+const products = [
   {
     _id: "1",
     name: "Mini & Major Project Kits",
     description: "Ready-made IT projects with source code, report, and documentation.",
-    image: ["https://cdn-icons-png.flaticon.com/512/3094/3094850.png"], // placeholder
+    image: ["https://cdn-icons-png.flaticon.com/512/3094/3094850.png"],
     price: 0,
+    category: "Academic Support"
   },
   {
     _id: "2",
@@ -24,6 +25,7 @@ export const ShopContextProvider = (props) => {
     description: "Subject-wise practical notes with step-by-step solutions and screenshots.",
     image: ["https://cdn-icons-png.flaticon.com/512/2991/2991148.png"],
     price: 0,
+    category: "Academic Support"
   },
   {
     _id: "3",
@@ -31,6 +33,7 @@ export const ShopContextProvider = (props) => {
     description: "Professional templates for documentation, PPTs, and project reports.",
     image: ["https://cdn-icons-png.flaticon.com/512/2921/2921222.png"],
     price: 0,
+    category: "Academic Support"
   },
   {
     _id: "4",
@@ -38,28 +41,97 @@ export const ShopContextProvider = (props) => {
     description: "Exam-ready solved papers and question banks for better preparation.",
     image: ["https://cdn-icons-png.flaticon.com/512/2847/2847455.png"],
     price: 0,
+    category: "Academic Support"
   },
+  {
+    _id: "5",
+    name: "Source Code Marketplace",
+    description: "Reusable code snippets and modules for projects and assignments.",
+    image: ["https://cdn-icons-png.flaticon.com/512/2721/2721297.png"],
+    price: 0,
+    category: "Technical Skills"
+  },
+  {
+    _id: "6",
+    name: "Learning Roadmaps & Cheat Sheets",
+    description: "Step-by-step roadmaps and cheat sheets for programming & tools.",
+    image: ["https://cdn-icons-png.flaticon.com/512/3135/3135715.png"],
+    price: 0,
+    category: "Technical Skills"
+  },
+  {
+    _id: "7",
+    name: "Workshops & Bootcamps",
+    description: "Hands-on training sessions for MERN, AI/ML, Cybersecurity, and more.",
+    image: ["https://cdn-icons-png.flaticon.com/512/1995/1995568.png"],
+    price: 0,
+    category: "Technical Skills"
+  },
+  {
+    _id: "8",
+    name: "Resume & Portfolio Templates",
+    description: "Student-friendly resume and portfolio templates to stand out.",
+    image: ["https://cdn-icons-png.flaticon.com/512/3135/3135715.png"],
+    price: 0,
+    category: "Career Growth"
+  },
+  {
+    _id: "9",
+    name: "Interview Prep Kits",
+    description: "DSA, coding, and HR interview Q&A for placements and internships.",
+    image: ["https://cdn-icons-png.flaticon.com/512/4359/4359963.png"],
+    price: 0,
+    category: "Career Growth"
+  },
+  {
+    _id: "10",
+    name: "Internship & Job Guidance",
+    description: "Guides on internships, freelancing, and job preparation tips.",
+    image: ["https://cdn-icons-png.flaticon.com/512/3135/3135692.png"],
+    price: 0,
+    category: "Career Growth"
+  },
+  {
+    _id: "11",
+    name: "Doubt Solving & Mentorship",
+    description: "Community support and mentorship for project and subject doubts.",
+    image: ["https://cdn-icons-png.flaticon.com/512/2659/2659360.png"],
+    price: 0,
+    category: "Extra Value"
+  },
+  {
+    _id: "12",
+    name: "Freelance Project Help",
+    description: "Connect students with freelancing opportunities for extra income.",
+    image: ["https://cdn-icons-png.flaticon.com/512/3135/3135712.png"],
+    price: 0,
+    category: "Extra Value"
+  },
+  {
+    _id: "13",
+    name: "Exam Preparation Kits",
+    description: "Crash-course notes and MCQ PDFs for quick exam revision.",
+    image: ["https://cdn-icons-png.flaticon.com/512/3135/3135790.png"],
+    price: 0,
+    category: "Extra Value"
+  }
 ];
 
-  const addToCart = (productId, size) => {
-    if (!size) {
-      toast.error("Please select size");
-      return;
-    }
+  const addToCart = (productId) => {
+
 
     let cartData = structuredClone(cartItems);
 
     if (cartData[productId]) {
-      if (cartData[productId][size]) {
-        cartData[productId][size] += 1;
-      } else {
-        cartData[productId][size] = 1;
-      }
+      cartData[productId] += 1;
+      toast.success("Added to Cart");
     } else {
-      cartData[productId] = {};
-      cartData[productId][size] = 1;
+      toast.success("Added to Cart");
+      cartData[productId] = 1;
     }
     setCartItems(cartData);
+    console.log(cartItems);
+    
   };
 
   const getCartCount = () => {
@@ -79,11 +151,11 @@ export const ShopContextProvider = (props) => {
     return count;
   };
 
-  const updateQuantity = (itemId, size, quantity) => {
+  const updateQuantity = (itemId, quantity) => {
     if (quantity > 0) {
       let cartData = structuredClone(cartItems);
 
-      cartData[itemId][size] = quantity;
+      cartData[itemId] = quantity;
 
       setCartItems(cartData);
     }
