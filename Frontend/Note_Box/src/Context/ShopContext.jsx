@@ -16,31 +16,31 @@ const products = [
     name: "Mini & Major Project Kits",
     description: "Ready-made IT projects with source code, report, and documentation.",
     image: ["https://cdn-icons-png.flaticon.com/512/3094/3094850.png"],
-    price: 0,
+    price: 29.99,
     category: "Academic Support"
   },
   {
-    _id: "2",
+    _id: "2", 
     name: "Practical Notes & Lab Manuals",
     description: "Subject-wise practical notes with step-by-step solutions and screenshots.",
     image: ["https://cdn-icons-png.flaticon.com/512/2991/2991148.png"],
-    price: 0,
+    price: 19.99,
     category: "Academic Support"
   },
   {
     _id: "3",
-    name: "Assignment & Report Templates",
+    name: "Assignment & Report Templates", 
     description: "Professional templates for documentation, PPTs, and project reports.",
     image: ["https://cdn-icons-png.flaticon.com/512/2921/2921222.png"],
-    price: 0,
+    price: 9.99,
     category: "Academic Support"
   },
   {
     _id: "4",
     name: "Solved Previous Year Papers",
     description: "Exam-ready solved papers and question banks for better preparation.",
-    image: ["https://cdn-icons-png.flaticon.com/512/2847/2847455.png"],
-    price: 0,
+    image: ["https://cdn-icons-png.flaticon.com/512/2847/2847455.png"], 
+    price: 14.99,
     category: "Academic Support"
   },
   {
@@ -48,7 +48,7 @@ const products = [
     name: "Source Code Marketplace",
     description: "Reusable code snippets and modules for projects and assignments.",
     image: ["https://cdn-icons-png.flaticon.com/512/2721/2721297.png"],
-    price: 0,
+    price: 24.99,
     category: "Technical Skills"
   },
   {
@@ -56,7 +56,7 @@ const products = [
     name: "Learning Roadmaps & Cheat Sheets",
     description: "Step-by-step roadmaps and cheat sheets for programming & tools.",
     image: ["https://cdn-icons-png.flaticon.com/512/3135/3135715.png"],
-    price: 0,
+    price: 12.99,
     category: "Technical Skills"
   },
   {
@@ -64,7 +64,7 @@ const products = [
     name: "Workshops & Bootcamps",
     description: "Hands-on training sessions for MERN, AI/ML, Cybersecurity, and more.",
     image: ["https://cdn-icons-png.flaticon.com/512/1995/1995568.png"],
-    price: 0,
+    price: 49.99,
     category: "Technical Skills"
   },
   {
@@ -72,15 +72,15 @@ const products = [
     name: "Resume & Portfolio Templates",
     description: "Student-friendly resume and portfolio templates to stand out.",
     image: ["https://cdn-icons-png.flaticon.com/512/3135/3135715.png"],
-    price: 0,
+    price: 15.99,
     category: "Career Growth"
   },
   {
-    _id: "9",
+    _id: "9", 
     name: "Interview Prep Kits",
     description: "DSA, coding, and HR interview Q&A for placements and internships.",
     image: ["https://cdn-icons-png.flaticon.com/512/4359/4359963.png"],
-    price: 0,
+    price: 34.99,
     category: "Career Growth"
   },
   {
@@ -88,7 +88,7 @@ const products = [
     name: "Internship & Job Guidance",
     description: "Guides on internships, freelancing, and job preparation tips.",
     image: ["https://cdn-icons-png.flaticon.com/512/3135/3135692.png"],
-    price: 0,
+    price: 29.99,
     category: "Career Growth"
   },
   {
@@ -96,7 +96,7 @@ const products = [
     name: "Doubt Solving & Mentorship",
     description: "Community support and mentorship for project and subject doubts.",
     image: ["https://cdn-icons-png.flaticon.com/512/2659/2659360.png"],
-    price: 0,
+    price: 39.99,
     category: "Extra Value"
   },
   {
@@ -104,7 +104,7 @@ const products = [
     name: "Freelance Project Help",
     description: "Connect students with freelancing opportunities for extra income.",
     image: ["https://cdn-icons-png.flaticon.com/512/3135/3135712.png"],
-    price: 0,
+    price: 19.99,
     category: "Extra Value"
   },
   {
@@ -112,7 +112,7 @@ const products = [
     name: "Exam Preparation Kits",
     description: "Crash-course notes and MCQ PDFs for quick exam revision.",
     image: ["https://cdn-icons-png.flaticon.com/512/3135/3135790.png"],
-    price: 0,
+    price: 24.99,
     category: "Extra Value"
   }
 ];
@@ -180,14 +180,16 @@ const products = [
     
   };
 
-  const deleteProduct = (itemId, size) => {
+  const deleteProduct = (itemId) => {
     let cartData = structuredClone(cartItems);
 
     if (cartData[itemId]) {
-      delete cartData[itemId][size];
-      if (Object.keys(cartData[itemId]).length === 0) {
-        delete cartData[itemId];
-      }
+      console.log(cartData);
+      
+      delete cartData[itemId];
+      // if (Object.keys(cartData[itemId]).length === 0) {
+      //   delete cartData[itemId];
+      // }
     }
 
     getCartAmount();
