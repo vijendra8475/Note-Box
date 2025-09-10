@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { CreditCard, Smartphone, ShieldCheck } from "lucide-react";
 import ShopContext from '../Context/ShopContext';
+import { NavLink } from 'react-router-dom';
 
 const Payment = () => {
 
@@ -76,9 +77,9 @@ const Payment = () => {
                         <button className="w-full flex items-center justify-center gap-3 py-3 px-6 rounded-xl bg-black text-white hover:bg-gray-800 transition">
                             <CreditCard size={20} /> Pay with Card
                         </button>
-                        <button className="w-full flex items-center justify-center gap-3 py-3 px-6 rounded-xl bg-blue-600 text-white hover:bg-blue-700 transition">
+                        <NavLink to="/pay" className="w-full flex items-center justify-center gap-3 py-3 px-6 rounded-xl bg-blue-600 text-white hover:bg-blue-700 transition">
                             <Smartphone size={20} /> Pay with UPI
-                        </button>
+                        </NavLink>
                         <button className="w-full flex items-center justify-center gap-3 py-3 px-6 rounded-xl bg-green-600 text-white hover:bg-green-700 transition">
                             <img
                                 src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg"

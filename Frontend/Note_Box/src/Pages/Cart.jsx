@@ -8,7 +8,7 @@ import { Trash2, ShoppingBag } from "lucide-react";
 
 
 const Cart = () => {
-  const { products, currency, cartItems, updateQuantity, deleteProduct } =
+  const { products, currency, cartItems, deleteProduct } =
     useContext(ShopContext);
 
   const [cartData, setCartData] = useState([]);
@@ -51,11 +51,11 @@ const Cart = () => {
             </div>
           ) : (
             <div className="space-y-6">
-              {cartData.map((item) => {
+              {cartData.map((item,idx) => {
                 const product = products.find((p) => p._id === item._id);
                 return (
                   <div
-                    key={item.id}
+                    key={idx}
                     className="flex items-center gap-6 border-b pb-4"
                   >
                     <img
